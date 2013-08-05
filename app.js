@@ -54,6 +54,16 @@ app.get('/', function (req, res) {
   )
 })
 
+app.get('/smartblock', function (req, res) {
+  io.sockets.emit('call', { cli: req.query.cli })
+  streamfile('initialBlock.xml', res)
+})
+
+app.get('/smartblock/tone', function (req, res) {
+  io.sockets.emit('five')
+  res.end()
+})
+
 /*
  * Sockets
  */

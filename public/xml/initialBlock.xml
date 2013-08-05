@@ -1,0 +1,8 @@
+<smartblock>
+	<getTone>
+		<timeout>10000</timeout>
+	</getTone>
+	<transitions>
+		<transition event=”timeout” href=”localhost:3000/smartblock/tone”/>
+	</transitions>
+</smartblock>
