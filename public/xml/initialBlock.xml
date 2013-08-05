@@ -1,8 +1,8 @@
 <smartblock>
-	<getTone>
-		<timeout>10000</timeout>
-	</getTone>
+	<playRinging>
+		<ringDuration>10</ringDuration>
+	</playRinging>
 	<transitions>
-		<transition event="timeout" href="localhost:3000/smartblock/tone"/>
+		<transition event="success" href="http://172.16.3.63:3000/smartblock/tone"/>
 	</transitions>
 </smartblock>

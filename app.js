@@ -43,9 +43,12 @@ app.get('/smartblock', function (req, res) {
   res.sendfile('initialBlock.xml', { root: __dirname + '/public/xml/' });
 });
 
+app.get('/smartblock/answer', function (req, res) {
+  res.sendfile('getTone.xml', { root: __dirname + '/public/xml/' });
+});
+
 app.get('/smartblock/tone', function (req, res) {
-  io.sockets.emit('five');
-  res.end();
+  res.sendfile('getTone.xml', { root: __dirname + '/public/xml/' });
 });
 
 /*
