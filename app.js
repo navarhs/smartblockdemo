@@ -30,6 +30,22 @@ app.use(express.static(__dirname + '/public'))
 server.listen(3000)
 
 /*
+ * Functions
+ */
+function streamXml(file, res) {
+  var filePath = __dirname + '/public/xml/' + file
+  var size = fs.statSync(filePath);
+
+  res.writeHead(200, {
+    'Content-Type': 'application/xml',
+    'Content-Length': size
+  })
+
+  var readStream = fs.createReadStream(filePath);
+  readStream.pipe(res)
+}
+
+/*
  * Routes
  */
 app.get('/', function (req, res) {
@@ -42,5 +58,5 @@ app.get('/', function (req, res) {
  * Sockets
  */
 io.sockets.on('connection', function (socket) {
-  
+
 })
