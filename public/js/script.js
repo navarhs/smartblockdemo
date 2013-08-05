@@ -2,9 +2,12 @@ $(document).ready(function () {
   drawKeypad('keypad');
 
   var socket = io.connect('http://localhost');
+  socket.on('call', function (data) {
+    console.log(data.cli);
+  })
   socket.on('five', function () {
     $('#key5').attr('fill', 'red');
-    setTimeout("$('#key5').attr('fill', 'orange');", 1000)
+    setTimeout("$('#key5').attr('fill', 'orange');", 1000);
   });
 });
 
