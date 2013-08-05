@@ -30,22 +30,6 @@ app.use(express.static(__dirname + '/public'));
 server.listen(3000);
 
 /*
- * Functions
- */
-function streamXml(file, res) {
-  var filePath = __dirname + '/public/xml/' + file;
-  var size = fs.statSync(filePath);
-
-  res.writeHead(200, {
-    'Content-Type': 'application/xml',
-    'Content-Length': size
-  });
-
-  var readStream = fs.createReadStream(filePath);
-  readStream.pipe(res);
-}
-
-/*
  * Routes
  */
 app.get('/', function (req, res) {
@@ -56,7 +40,7 @@ app.get('/', function (req, res) {
 
 app.get('/smartblock', function (req, res) {
   io.sockets.emit('call', { cli: req.query.cli });
-  streamXml('initialBlock.xml', res);
+  res.sendfile('initialBlock.xml', { root: __dirname + '/public/xml/' });
 });
 
 app.get('/smartblock/tone', function (req, res) {
