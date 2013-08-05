@@ -4,6 +4,7 @@ $(document).ready(function () {
   var socket = io.connect('http://localhost');
   socket.on('five', function () {
     $('#key5').attr('fill', 'red');
+    setTimeout("$('#key5').attr('fill', 'orange');", 1000)
   });
 });
 
