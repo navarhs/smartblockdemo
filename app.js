@@ -7,7 +7,7 @@ var express = require('express')
   , io = require('socket.io').listen(server)
   , fs = require('fs')
   , stylus = require('stylus')
-  , nib = require('nib')
+  , nib = require('nib');
 
 /*
  * Set Up
@@ -15,34 +15,34 @@ var express = require('express')
 function compile(str, path) {
   return stylus(str)
     .set('filename', path)
-    .use(nib())
+    .use(nib());
 }
-app.set('views', __dirname + '/views')
-app.set('view engine', 'jade')
-app.use(express.logger('dev'))
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+app.use(express.logger('dev'));
 app.use(stylus.middleware(
   { src: __dirname + '/public'
   , compile: compile
   }
-))
-app.use(express.static(__dirname + '/public'))
+));
+app.use(express.static(__dirname + '/public'));
 
-server.listen(3000)
+server.listen(3000);
 
 /*
  * Functions
  */
 function streamXml(file, res) {
-  var filePath = __dirname + '/public/xml/' + file
+  var filePath = __dirname + '/public/xml/' + file;
   var size = fs.statSync(filePath);
 
   res.writeHead(200, {
     'Content-Type': 'application/xml',
     'Content-Length': size
-  })
+  });
 
   var readStream = fs.createReadStream(filePath);
-  readStream.pipe(res)
+  readStream.pipe(res);
 }
 
 /*
@@ -51,22 +51,22 @@ function streamXml(file, res) {
 app.get('/', function (req, res) {
   res.render('index',
   { title : 'Home' }
-  )
-})
+  );
+});
 
 app.get('/smartblock', function (req, res) {
-  io.sockets.emit('call', { cli: req.query.cli })
-  streamXml('initialBlock.xml', res)
-})
+  io.sockets.emit('call', { cli: req.query.cli });
+  streamXml('initialBlock.xml', res);
+});
 
 app.get('/smartblock/tone', function (req, res) {
-  io.sockets.emit('five')
-  res.end()
-})
+  io.sockets.emit('five');
+  res.end();
+});
 
 /*
  * Sockets
  */
 io.sockets.on('connection', function (socket) {
 
-})
+});

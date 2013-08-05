@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 function drawKeypad(svg) {
   var svg = document.getElementById(svg);
-  var svgns = 'http://www.w3.org/2000/svg'
+  var svgns = 'http://www.w3.org/2000/svg';
 
   var k = 1;
   for (var i=1; i<=3; i++) {
