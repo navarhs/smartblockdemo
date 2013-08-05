@@ -48,7 +48,10 @@ app.get('/smartblock/answer', function (req, res) {
 });
 
 app.get('/smartblock/tone', function (req, res) {
-  io.sockets.emit('tone', { tone: req.query.tone });
+  if (req.query.tone == '#')
+    io.sockets.emit('tone', { tone: 'hash' })
+  else
+    io.sockets.emit('tone', { tone: req.query.tone });
   res.sendfile('getTone.xml', { root: __dirname + '/public/xml/' });
 });
 

@@ -18,13 +18,20 @@ function drawKeypad(svg) {
   var svgns = 'http://www.w3.org/2000/svg';
 
   var k = 1;
-  for (var i=1; i<=3; i++) {
+  for (var i=1; i<=4; i++) {
     for (var j=1; j<=3; j++) {
-      var y = svg.getAttribute('width') * 1/4 * i;
-      var x = svg.getAttribute('height') * 1/4 * j;
+      var val = k;
+      switch (k)
+      {
+        case 10: val = '*'; break;
+        case 11: val = 0; break;
+        case 12: val = 'hash'; break;
+      }
+      var y = svg.getAttribute('height') * 1/5 * i;
+      var x = svg.getAttribute('width') * 1/4 * j;
 
       var circle = document.createElementNS(svgns, 'circle');
-      circle.setAttribute('id', 'key' + k);
+      circle.setAttribute('id', 'key' + val);
       circle.setAttribute('cx', x);
       circle.setAttribute('cy', y);
       circle.setAttribute('r', '20');
@@ -38,7 +45,14 @@ function drawKeypad(svg) {
       text.setAttribute('font-family', "'Arial'");
       text.setAttribute('font-size', '16');
       text.setAttribute('font-weight', 'bold');
-      text.textContent = k;
+      if (val == 'hash')
+        text.textContent = '#'
+      else {
+        if (val == '*')
+          text.textContent = '\u2731'
+        else
+          text.textContent = val;
+      }
 
       svg.appendChild(circle);
       svg.appendChild(text);
