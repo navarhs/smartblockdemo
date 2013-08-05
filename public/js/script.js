@@ -9,7 +9,7 @@ $(document).ready(function () {
   socket.on('tone', function (data) {
     tone = data.tone;
     $('#key' + tone).attr('fill', 'red');
-    setTimeout("$('#key" + tone + "').attr('fill', 'yellow');", 1000);
+    setTimeout("$('#key" + tone + "').attr('fill', 'green');", 1000);
   });
 });
 
@@ -28,7 +28,7 @@ function drawKeypad(svg) {
       circle.setAttribute('cx', x);
       circle.setAttribute('cy', y);
       circle.setAttribute('r', '20');
-      circle.setAttribute('fill', 'yellow');
+      circle.setAttribute('fill', 'green');
       
       var text = document.createElementNS(svgns, 'text');
       text.setAttribute('x', x);
