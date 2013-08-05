@@ -5,9 +5,11 @@ $(document).ready(function () {
   socket.on('call', function (data) {
     console.log(data.cli);
   })
-  socket.on('five', function () {
-    $('#key5').attr('fill', 'red');
-    setTimeout("$('#key5').attr('fill', 'orange');", 1000);
+
+  socket.on('tone', function (data) {
+    tone = data.tone;
+    $('#key' + tone).attr('fill', 'red');
+    setTimeout("$('#key" + tone + "').attr('fill', 'yellow');", 1000);
   });
 });
 
@@ -26,7 +28,7 @@ function drawKeypad(svg) {
       circle.setAttribute('cx', x);
       circle.setAttribute('cy', y);
       circle.setAttribute('r', '20');
-      circle.setAttribute('fill', 'orange');
+      circle.setAttribute('fill', 'yellow');
       
       var text = document.createElementNS(svgns, 'text');
       text.setAttribute('x', x);
