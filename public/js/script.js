@@ -9,7 +9,7 @@ $(document).ready(function () {
   socket.on('tone', function (data) {
     tone = data.tone;
     $('#key' + tone).attr('fill', 'red');
-    setTimeout("$('#key" + tone + "').attr('fill', 'green');", 1000);
+    setTimeout("$('#key" + tone + "').attr('fill', 'green');", 300);
   });
 });
 
@@ -23,7 +23,7 @@ function drawKeypad(svg) {
       var val = k;
       switch (k)
       {
-        case 10: val = '*'; break;
+        case 10: val = 'star'; break;
         case 11: val = 0; break;
         case 12: val = 'hash'; break;
       }
@@ -45,11 +45,11 @@ function drawKeypad(svg) {
       text.setAttribute('font-family', "'Arial'");
       text.setAttribute('font-size', '16');
       text.setAttribute('font-weight', 'bold');
-      if (val == 'hash')
-        text.textContent = '#'
+      if (val == 'star')
+        text.textContent = '\u2731';
       else {
-        if (val == '*')
-          text.textContent = '\u2731'
+        if (val == 'hash')
+          text.textContent = '#';
         else
           text.textContent = val;
       }
