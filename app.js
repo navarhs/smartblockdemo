@@ -68,6 +68,8 @@ app.get('/smartblock/tone', function (req, res) {
     else
       io.sockets.emit('tone', { tone: req.query.tone });
   }
+  if (game != null)
+    tictactoe.move(game, req.query.cli, io.sockets, req.query.tone);
   res.sendfile('getTone.xml', { root: __dirname + '/public/xml/' });
 });
 

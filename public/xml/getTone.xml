@@ -3,7 +3,7 @@
 		<timeout>10000</timeout>
 	</getTone>
 	<transitions>
-		<transition event="tone" href="http://172.16.3.63:3000/smartblock/tone?tone={tone}"/>
-		<transition event="timeout" href="http://172.16.3.63:3000/smartblock/answer"/>
+		<transition event="tone" href="http://172.16.3.63:3000/smartblock/tone?cli={CLI}&amp;tone={tone}"/>
+		<transition event="timeout" href="http://172.16.3.63:3000/smartblock/answer?cli={CLI}"/>
 	</transitions>
 </smartblock>

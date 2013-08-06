@@ -9,7 +9,15 @@ $(document).ready(function () {
     $('#player2').text("Player 2 connected: " + data.player);
   });
 
-  socket.on('tone', function (data) {
-    tone = data.tone;
+  socket.on('move', function (data) {
+    console.log("move made at: " + data.square + " with " + data.sign);
+  });
+
+  socket.on('log', function (data) {
+    console.log(data.message);
+  });
+
+  socket.on('gameOver', function (data) {
+    console.log("winner is: " + data.winner);
   });
 });

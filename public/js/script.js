@@ -3,7 +3,7 @@ $(document).ready(function () {
 
   var socket = io.connect('http://localhost');
   socket.on('call', function (data) {
-    $('#call').text("Call established with: " + data.cli);
+    $('#call').text('Call established with: ' + data.cli);
   })
 
   socket.on('tone', function (data) {
