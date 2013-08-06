@@ -1,0 +1,19 @@
+extend layout
+block scripts
+  script(type='text/javascript', src='/js/tictactoe.js')
+block content
+  div(id="board")
+    table
+      tr(id="row1")
+        td(class="square")
+        td(class="square v")
+        td(class="square")
+      tr(id="row2")
+        td(class="square h")
+        td(class="square v h")
+        td(class="square h")
+      tr(id="row3")
+        td(class="square")
+        td(class="square v")
+        td(class="square")
+block sidebar

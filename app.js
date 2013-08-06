@@ -38,6 +38,12 @@ app.get('/', function (req, res) {
   );
 });
 
+app.get('/game', function (req, res) {
+  res.render('game',
+  { title : 'TicTacToe' }
+  );
+});
+
 app.get('/smartblock', function (req, res) {
   io.sockets.emit('call', { cli: req.query.cli });
   res.sendfile('initialBlock.xml', { root: __dirname + '/public/xml/' });
