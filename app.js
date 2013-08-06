@@ -7,7 +7,8 @@ var express = require('express')
   , io = require('socket.io').listen(server)
   , fs = require('fs')
   , stylus = require('stylus')
-  , nib = require('nib');
+  , nib = require('nib')
+  , tictactoe = require('./tictactoe');
 
 /*
  * Set Up
@@ -42,6 +43,7 @@ app.get('/game', function (req, res) {
   res.render('game',
   { title : 'TicTacToe' }
   );
+  tictactoe.createGame();
 });
 
 app.get('/smartblock', function (req, res) {
