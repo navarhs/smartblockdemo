@@ -10,7 +10,7 @@ $(document).ready(function () {
   });
 
   socket.on('move', function (data) {
-    console.log("move made at: " + data.square + " with " + data.sign);
+    $('#b' + data.square).text(data.sign);
   });
 
   socket.on('log', function (data) {

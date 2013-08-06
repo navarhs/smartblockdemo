@@ -73,8 +73,8 @@ exports.move = function (game, player, sockets, move) {
 
 	if (game.player1 != player && game.player2 != player) {
 		sockets.emit('log', { message: "You are not a valid player" })
+		return;
 	}
-		return
 
 	if (game.player1 == player && !game.p1_turn) {
 		sockets.emit('log', { message: "Player 1, it's not your turn" });
