@@ -1,5 +1,3 @@
-gameRunning = 0;
-
 exports.createGame = function () {
 	Game = function() {
 		this.board = new Array(0,0,0,0,0,0,0,0,0);
@@ -11,4 +9,17 @@ exports.createGame = function () {
 	}
 	gameRunning = 1;
 	return new Game();
+}
+
+exports.addPlayer = function (game, player, sockets) {
+	if (game.player1 == undefined) {
+		game.player1 = player;
+		sockets.emit('player1', { player: player })
+	}
+	else {
+		if (game.player2 == undefined) {
+			game.player2 = player;
+			sockets.emit('player2', { player: player })
+		}
+	}
 }

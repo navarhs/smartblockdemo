@@ -30,6 +30,8 @@ app.use(express.static(__dirname + '/public'));
 
 server.listen(3000);
 
+var game = null;
+
 /*
  * Routes
  */
@@ -43,11 +45,13 @@ app.get('/game', function (req, res) {
   res.render('game',
   { title : 'TicTacToe' }
   );
-  tictactoe.createGame();
+  game = tictactoe.createGame();
 });
 
 app.get('/smartblock', function (req, res) {
   io.sockets.emit('call', { cli: req.query.cli });
+  if (game != null)
+    tictactoe.addPlayer(game, req.query.cli, io.sockets);
   res.sendfile('initialBlock.xml', { root: __dirname + '/public/xml/' });
 });
 
