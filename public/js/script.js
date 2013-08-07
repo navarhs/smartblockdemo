@@ -1,5 +1,6 @@
 $(document).ready(function () {
   drawKeypad('keypad');
+  drawDivKeypad('keys');
 
   var socket = io.connect('http://localhost');
   socket.on('call', function (data) {
@@ -10,6 +11,8 @@ $(document).ready(function () {
     tone = data.tone;
     $('#key' + tone).attr('fill', 'red');
     setTimeout("$('#key" + tone + "').attr('fill', 'green');", 300);
+    $('#divKey' + tone).toggleClass('checked');
+    setTimeout("$('#divKey" + tone + "').toggleClass('checked');", 300)
   });
 });
 
@@ -56,6 +59,47 @@ function drawKeypad(svg) {
 
       svg.appendChild(circle);
       svg.appendChild(text);
+
+      k++;
+    }
+  }
+}
+
+function drawDivKeypad(div) {
+  var div = document.getElementById(div);
+
+  var k = 1;
+  for (var i=1; i<=4; i++) {
+    for (var j=1; j<=3; j++) {
+      var val = k;
+      switch (k)
+      {
+        case 10: val = 'star'; break;
+        case 11: val = 0; break;
+        case 12: val = 'hash'; break;
+      }
+
+      var keyBorder = document.createElement('div');
+      keyBorder.className = 'keyBorder';
+
+      var key = document.createElement('div');
+      key.className = 'key';
+      key.setAttribute('id', 'divKey' + val);
+
+      var keyContent = document.createElement('b');
+      keyContent.className = 'keyContent';
+      if (val == 'star')
+        keyContent.textContent = '\u2731';
+      else {
+        if (val == 'hash')
+          keyContent.textContent = '#';
+        else
+          keyContent.textContent = val;
+      }
+
+      key.appendChild(keyContent);
+      keyBorder.appendChild(key);
+      div.appendChild(keyBorder);
 
       k++;
     }
