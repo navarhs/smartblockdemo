@@ -72,22 +72,22 @@ exports.move = function (game, player, sockets, move) {
 	var square = move - 1;
 
 	if (game.player1 != player && game.player2 != player) {
-		sockets.emit('log', { message: "You are not a valid player" })
+		sockets.emit('log', { message: "You are not a valid player." })
 		return;
 	}
 
 	if (game.player1 == player && !game.p1_turn) {
-		sockets.emit('log', { message: "Player 1, it's not your turn" });
+		sockets.emit('log', { message: "Player 1, it's not your turn." });
 		return;
 	}
 
 	if (game.player2 == player && game.p1_turn) {
-		sockets.emit('log', { message: "Player 2, it's not your turn" });
+		sockets.emit('log', { message: "Player 2, it's not your turn." });
 		return;
 	}
 
 	if (game.board[square] != 0 || square < 0 || square > 8) {
-		sockets.emit('log', { message: "That is not a valid move" });
+		sockets.emit('log', { message: "That is not a valid move." });
 		return;
 	}
 

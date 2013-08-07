@@ -8,7 +8,7 @@ block infobar
       | no player connected <br/> <br/>
       | 
   .widget
-    h1 Player 2
+    h1 Player 3
     p#player2
       | no player connected <br/> <br/>
 block content
@@ -26,5 +26,10 @@ block content
         td(id='b7', class='square')
         td(id='b8', class='square v')
         td(id='b9', class='square')
+block lowerbar
+  .widget(style="width:400px; margin-top: 20px")
+    h1 Game Status
+    p#log
+      | Waiting for players...
 block footer
   a(href='../') &#8656;
