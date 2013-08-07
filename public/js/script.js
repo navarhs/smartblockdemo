@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  drawKeypad('keypad');
+  //drawKeypad('keypad');
   drawDivKeypad('keys');
 
   var socket = io.connect('http://localhost');
@@ -9,8 +9,8 @@ $(document).ready(function () {
 
   socket.on('tone', function (data) {
     tone = data.tone;
-    $('#key' + tone).attr('fill', 'red');
-    setTimeout("$('#key" + tone + "').attr('fill', 'green');", 300);
+    // $('#key' + tone).attr('fill', 'red');
+    // setTimeout("$('#key" + tone + "').attr('fill', 'green');", 300);
     $('#divKey' + tone).toggleClass('checked');
     setTimeout("$('#divKey" + tone + "').toggleClass('checked');", 300)
   });
