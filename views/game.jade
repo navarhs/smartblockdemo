@@ -5,12 +5,12 @@ block infobar
   .widget
     h1 Player 1
     p#player1
-      | no player connected <br/> <br/>
+      | <i> No player connected </i> <br/> <br/>
       | 
   .widget
     h1 Player 3
     p#player2
-      | no player connected <br/> <br/>
+      | <i> No player connected </i> <br/> <br/>
 block content
   div(id='board')
     table
@@ -27,9 +27,9 @@ block content
         td(id='b8', class='square v')
         td(id='b9', class='square')
 block lowerbar
-  .widget(style="width:400px; margin-top: 20px")
+  .widget(style="width:400px; margin-top: 30px")
     h1 Game Status
     p#log
-      | Waiting for players...
+      | <i> Waiting for players... </i> <br/> <br/>
 block footer
   a(href='../') &#8656;
