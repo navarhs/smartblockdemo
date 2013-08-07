@@ -24,13 +24,27 @@ $(document).ready(function () {
   });
 
   socket.on('gameOver', function (data) {
-    if (data.winner == 1)
-      $('#log').html("Game over. <br/>The winner is player 1!")
+    if (data.winner == 0)
+      $('#log').html("Game over. <br/>The game is a draw!")
     else {
-      if (data.winner == 2)
-        $('#log').html("Game over. <br/>The winner is player 2!")
+      if (data.winner == 1)
+        $('#log').html("Game over. <br/>The winner is player 1!")
       else
-        $('#log').html("Game over. <br/>The game is a draw!")
+        $('#log').html("Game over. <br/>The winner is player 2!")
+      markSquares(data.squares, data.direction);
     }
   });
 });
+
+function markSquares(squares, direction) {
+  for (var i=0; i<squares.length; i++) {
+    var image;
+    switch (direction) {
+      case 0: image = '/img/horizontal.png'; break;
+      case 1: image = '/img/vertical.png'; break;
+      case 2: image = '/img/diagonal-back.png'; break;
+      case 3: image = '/img/diagonal-forw.png'; break;
+    }
+    $('#b' + squares[i]).css('background-image', 'url(' + image + ')');
+  }
+}

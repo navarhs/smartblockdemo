@@ -26,35 +26,102 @@ exports.addPlayer = function (game, player, sockets) {
 	}
 }
 
+// exports.isWon = function (b) {
+// 	// horizontals
+// 	if ((b[0] == b[1] && b[1] == b[2]) && b[0])
+// 		return b[0];
+
+// 	if ((b[3] == b[4] && b[4] == b[5]) && b[3])
+// 		return b[3];
+
+// 	if ((b[6] == b[7] && b[7] == b[8]) && b[6])
+// 		return b[6];
+
+// 	// verticals
+// 	if ((b[0] == b[3] && b[3] == b[6]) && b[0])
+// 		return b[0];
+
+// 	if ((b[1] == b[4] && b[4] == b[7]) && b[1])
+// 		return b[1];
+
+// 	if ((b[2] == b[5] && b[5] == b[8]) && b[2])
+// 		return b[2];
+
+// 	// diagonals
+// 	if ((b[0] == b[4] && b[4] == b[8]) && b[0])
+// 		return b[0];
+
+// 	if ((b[6] == b[4] && b[4] == b[2]) && b[6])
+// 		return b[6];
+// 	return 0;
+// }
+
 exports.isWon = function (b) {
+	Result = function () {
+		this.winner = 0;
+		this.squares;
+		this.direction;
+	}
+	var result = new Result();
+
 	// horizontals
-	if ((b[0] == b[1] && b[1] == b[2]) && b[0])
-		return b[0];
+	if ((b[0] == b[1] && b[1] == b[2]) && b[0]) {
+		result.winner = b[0];
+		result.squares = [1,2,3];
+		result.direction = 0;
+		return result;
+	}
 
-	if ((b[3] == b[4] && b[4] == b[5]) && b[3])
-		return b[3];
+	if ((b[3] == b[4] && b[4] == b[5]) && b[3]) {
+		result.winner = b[3];
+		result.squares = [4,5,6];
+		result.direction = 0;
+		return result;
+	}
 
-	if ((b[6] == b[7] && b[7] == b[8]) && b[6])
-		return b[6];
+	if ((b[6] == b[7] && b[7] == b[8]) && b[6]) {
+		result.winner = b[6];
+		result.squares = [7,8,9];
+		result.direction = 0;
+		return result;
+	}
 
 	// verticals
-	if ((b[0] == b[3] && b[3] == b[6]) && b[0])
-		return b[0];
+	if ((b[0] == b[3] && b[3] == b[6]) && b[0]) {
+		result.winner = b[0];
+		result.squares = [1,4,7];
+		result.direction = 1;
+		return result;
+	}
 
-	if ((b[1] == b[4] && b[4] == b[7]) && b[1])
-		return b[1];
+	if ((b[1] == b[4] && b[4] == b[7]) && b[1]) {
+		result.winner = b[1];
+		result.squares = [2,5,8];
+		result.direction = 1;
+		return result;
+	}
 
-	if ((b[2] == b[5] && b[5] == b[8]) && b[2])
-		return b[2];
+	if ((b[2] == b[5] && b[5] == b[8]) && b[2]) {
+		result.winner = b[2];
+		result.squares = [3,6,9];
+		result.direction = 1;
+		return result;
+	}
 
 	// diagonals
-	if ((b[0] == b[4] && b[4] == b[8]) && b[0])
-		return b[0];
+	if ((b[0] == b[4] && b[4] == b[8]) && b[0]) {
+		result.winner = b[0];
+		result.squares = [1,5,9];
+		result.direction = 2;
+	}
 
-	if ((b[6] == b[4] && b[4] == b[2]) && b[6])
-		return b[6];
+	if ((b[6] == b[4] && b[4] == b[2]) && b[6]) {
+		result.winner = b[6];
+		result.squares = [3,5,7];
+		result.direction = 3;
+	}
 
-	return 0;
+	return result;
 }
 
 exports.isFull = function (b) {
@@ -102,10 +169,11 @@ exports.move = function (game, player, sockets, move) {
 
 	game.p1_turn = !game.p1_turn;
 
-	var winner = exports.isWon(game.board);
+	var result = exports.isWon(game.board);
+	var winner = result.winner;
 
 	if (winner || exports.isFull(game.board)) {
-		sockets.emit('gameOver', { winner: winner });
+		sockets.emit('gameOver', { winner: winner, squares: result.squares, direction: result.direction });
 		gameRunning = 0;
 	}
 
