@@ -1,6 +1,16 @@
 extend layout
 block scripts
   script(type='text/javascript', src='/js/tictactoe.js')
+block infobar
+  .widget
+    h1 Player 1
+    p#player1
+      | no player connected <br/> <br/>
+      | 
+  .widget
+    h1 Player 2
+    p#player2
+      | no player connected <br/> <br/>
 block content
   div(id='board')
     table
@@ -16,11 +26,3 @@ block content
         td(id='b7', class='square')
         td(id='b8', class='square v')
         td(id='b9', class='square')
-block sidebar
-  .widget
-    h1 Game Status
-    p#player1
-      | Player 1 not connected <br/> <br/>
-      | 
-    p#player2
-      | Player 2 not connected <br/> <br/>

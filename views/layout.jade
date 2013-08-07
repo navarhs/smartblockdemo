@@ -7,12 +7,10 @@ html
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
     block scripts
   body
-    header
-      h1 My Site
     .container
+      .infobar      
+        block infobar
       .main-content
         block content
-      .sidebar      
-        block sidebar
     footer
       p Running on node with Express, Jade and Stylus
