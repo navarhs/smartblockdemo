@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var socket = io.connect('http://localhost');
+  var socket = io.connect('http://172.16.3.63');
 
   socket.on('player1', function (data) {
     $('#player1').html("Player connected: <br/>" + data.player);

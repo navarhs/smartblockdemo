@@ -1,9 +1,9 @@
 $(document).ready(function () {
   drawKeypad('keys');
 
-  var socket = io.connect('http://localhost');
+  var socket = io.connect('http://172.16.3.63');
   socket.on('call', function (data) {
-    $('#call').text('Call established with: ' + data.cli);
+    $('#call').html('Call established with: <br/>' + data.cli);
   })
 
   socket.on('tone', function (data) {
