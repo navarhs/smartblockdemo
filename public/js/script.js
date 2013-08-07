@@ -8,7 +8,7 @@ $(document).ready(function () {
 
   socket.on('tone', function (data) {
     tone = data.tone;
-    $('#divKey' + tone).toggleClass('checked');
+    $('#key' + tone).toggleClass('checked');
     setTimeout("$('#key" + tone + "').toggleClass('checked');", 300)
   });
 });
