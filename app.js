@@ -1,14 +1,14 @@
 /*
  * Module dependencies
  */
-var express = require('express')
-  , app = express()
-  , server = require('http').createServer(app)
-  , io = require('socket.io').listen(server)
-  , fs = require('fs')
-  , stylus = require('stylus')
-  , nib = require('nib')
-  , tictactoe = require('./tictactoe');
+var express = require('express'),
+    app = express(),
+    server = require('http').createServer(app),
+    io = require('socket.io').listen(server),
+    fs = require('fs'),
+    stylus = require('stylus'),
+    nib = require('nib'),
+    tictactoe = require('./tictactoe');
 
 /*
  * Set Up
@@ -22,8 +22,8 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.logger('dev'));
 app.use(stylus.middleware(
-  { src: __dirname + '/public'
-  , compile: compile
+  { src: __dirname + '/public',
+    compile: compile
   }
 ));
 app.use(express.static(__dirname + '/public'));
@@ -50,16 +50,21 @@ app.get('/game', function (req, res) {
 
 app.get('/smartblock', function (req, res) {
   io.sockets.emit('call', { cli: req.query.cli });
-  if (game != null)
+  if (game !== null)
     tictactoe.addPlayer(game, req.query.cli, io.sockets);
   res.sendfile('initialBlock.xml', { root: __dirname + '/public/xml/' });
 });
 
 app.get('/smartblock/answer', function (req, res) {
+  res.sendfile('playAnnouncement.xml', { root: __dirname + '/public/xml/' });
+});
+
+app.get('/smartblock/toneStart', function (req, res) {
   res.sendfile('getTone.xml', { root: __dirname + '/public/xml/' });
 });
 
 app.get('/smartblock/tone', function (req, res) {
+  console.log("hi");
   if (req.query.tone == '*')
     io.sockets.emit('tone', { tone: 'star'});
   else {
@@ -68,7 +73,7 @@ app.get('/smartblock/tone', function (req, res) {
     else
       io.sockets.emit('tone', { tone: req.query.tone });
   }
-  if (game != null)
+  if (game !== null)
     tictactoe.move(game, req.query.cli, io.sockets, req.query.tone);
   res.sendfile('getTone.xml', { root: __dirname + '/public/xml/' });
 });

@@ -1,0 +1,7 @@
+<smartblock>
+	<playAnnouncement mediaSource="vox://Smartblocks/hello.vox" />
+	<transitions>
+		<transition event="success" href="http://172.16.3.63:3000/smartblock/toneStart?cli={CLI}"/>
+		<transition event="failed" href="http://172.16.3.63:3000/smartblock/toneStart?cli={CLI}"/>
+	</transitions>
+</smartblock>

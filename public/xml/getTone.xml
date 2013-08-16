@@ -4,6 +4,6 @@
 	</getTone>
 	<transitions>
 		<transition event="tone" href="http://172.16.3.63:3000/smartblock/tone?cli={CLI}&amp;tone={tone}"/>
-		<transition event="timeout" href="http://172.16.3.63:3000/smartblock/answer?cli={CLI}"/>
+		<transition event="timeout" href="http://172.16.3.63:3000/smartblock/toneStart?cli={CLI}"/>
 	</transitions>
 </smartblock>

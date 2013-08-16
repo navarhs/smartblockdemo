@@ -4,17 +4,17 @@ $(document).ready(function () {
   var socket = io.connect('http://172.16.3.63');
   socket.on('call', function (data) {
     $('#call').html('Call established with: <br/>' + data.cli);
-  })
+  });
 
   socket.on('tone', function (data) {
     tone = data.tone;
-    $('#key' + tone).toggleClass('checked');
-    setTimeout("$('#key" + tone + "').toggleClass('checked');", 300)
+    $('#key' + tone).addClass('checked');
+    setTimeout("$('#key" + tone + "').removeClass('checked');", 300);
   });
 });
 
 function drawKeypad(div) {
-  var div = document.getElementById(div);
+  var div2 = document.getElementById(div);
 
   var k = 1;
   for (var i=1; i<=4; i++) {
@@ -47,7 +47,7 @@ function drawKeypad(div) {
 
       key.appendChild(keyContent);
       keyBorder.appendChild(key);
-      div.appendChild(keyBorder);
+      div2.appendChild(keyBorder);
 
       k++;
     }

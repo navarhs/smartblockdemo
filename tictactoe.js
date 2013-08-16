@@ -8,30 +8,30 @@ exports.createGame = function () {
 		this.player2 = undefined;
 
 		this.p1_turn = 1;
-	}
+	};
 	return new Game();
-}
+};
 
 exports.addPlayer = function (game, player, sockets) {
-	if (game.player1 == undefined) {
+	if (game.player1 === undefined) {
 		game.player1 = player;
-		sockets.emit('player1', { player: player })
+		sockets.emit('player1', { player: player });
 	}
 	else {
-		if (game.player2 == undefined) {
+		if (game.player2 === undefined && game.player1 !== player) {
 			game.player2 = player;
-			sockets.emit('player2', { player: player })
+			sockets.emit('player2', { player: player });
 			gameRunning = 1;
 		}
 	}
-}
+};
 
 exports.isWon = function (b) {
 	Result = function () {
 		this.winner = 0;
-		this.squares;
-		this.direction;
-	}
+		this.squares = new Array(0,0,0);
+		this.direction = 0;
+	};
 	var result = new Result();
 
 	// horizontals
@@ -92,15 +92,15 @@ exports.isWon = function (b) {
 	}
 
 	return result;
-}
+};
 
 exports.isFull = function (b) {
 	for (var i=0; i<b.length; i++)
-		if (b[i] == 0)
+		if (b[i] === 0)
 			return false;
 
 	return true;
-}
+};
 
 exports.move = function (game, player, sockets, move) {
 	if (!gameRunning)
@@ -109,7 +109,7 @@ exports.move = function (game, player, sockets, move) {
 	var square = move - 1;
 
 	if (game.player1 != player && game.player2 != player) {
-		sockets.emit('log', { message: "You are not a valid player." })
+		sockets.emit('log', { message: "You are not a valid player." });
 		return;
 	}
 
@@ -123,18 +123,18 @@ exports.move = function (game, player, sockets, move) {
 		return;
 	}
 
-	if (game.board[square] != 0 || square < 0 || square > 8) {
+	if (game.board[square] !== 0 || square < 0 || square > 8) {
 		sockets.emit('log', { message: "That is not a valid move." });
 		return;
 	}
 
 	if (game.p1_turn) {
 		game.board[square] = 1;
-		sockets.emit('move', { square: move, sign: 'X' })
+		sockets.emit('move', { square: move, sign: 'X' });
 	}
 	else {
 		game.board[square] = 2;
-		sockets.emit('move', { square: move, sign: 'O' })
+		sockets.emit('move', { square: move, sign: 'O' });
 	}
 
 	game.p1_turn = !game.p1_turn;
@@ -148,4 +148,4 @@ exports.move = function (game, player, sockets, move) {
 	}
 
 	sockets.emit('board', { board : game.board });
-}
+};
