@@ -64,7 +64,6 @@ app.get('/smartblock/toneStart', function (req, res) {
 });
 
 app.get('/smartblock/tone', function (req, res) {
-  console.log("hi");
   if (req.query.tone == '*')
     io.sockets.emit('tone', { tone: 'star'});
   else {
